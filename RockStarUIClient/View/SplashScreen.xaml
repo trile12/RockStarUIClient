@@ -12,7 +12,9 @@
         MouseDown="Window_MouseDown"
         Title="SplashScreen" Height="400" Width="500">
     <Grid>
-        <Button HorizontalAlignment="Right" 
+        <Button HorizontalAlignment="Right" Click="Close_Click"
+                Content="{StaticResource close_ico}"
+                Style="{StaticResource WindowButtonStyle}"
                 VerticalAlignment="Top" Margin="3"/>
         <MediaElement 
             Height="97"
@@ -21,7 +23,9 @@
             Visibility="Visible" 
             LoadedBehavior="Play"
             UnloadedBehavior="Manual"
-            Source="../../Assets/RAnimated1.gif" ScrubbingEnabled="True"/>
+            Source="../../Assets/RAnimated1.gif"
+            MediaEnded="MediaElement_Ended"
+            ScrubbingEnabled="True"/>
         <TextBlock
             HorizontalAlignment="Center"
             VerticalAlignment="Center"

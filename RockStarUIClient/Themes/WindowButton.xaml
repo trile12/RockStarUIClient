@@ -9,11 +9,25 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}"
+                    <Border Background="{TemplateBinding Background}" Name="bd"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Path Data="{TemplateBinding Content}" Fill="White" Height="10" Width="10" Stretch="Uniform"/>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <!--<Setter TargetName="bd" Property="Border.Background" Value="#000000"/>-->
+                            <Setter Property="Background" Value="#B94A3B"/>
+                        </Trigger>
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="Tag" Value="IsCloseButton"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="#B94A4B"/>
+                        </MultiTrigger>-->
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
+
             </Setter.Value>
         </Setter>
 

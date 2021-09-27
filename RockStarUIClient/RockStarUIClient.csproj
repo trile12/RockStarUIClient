@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -69,6 +72,10 @@
     <Page Include="Themes\WindowButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SplashScreen.xaml">
       <SubType>Designer</SubType>
@@ -110,7 +117,9 @@
     <Resource Include="Assets\news3.jpg" />
     <Resource Include="Assets\news4.jpg" />
     <Resource Include="Assets\news5.jpg" />
-    <Resource Include="Assets\RAnimated1.gif" />
+    <Content Include="Assets\RAnimated1.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Assets\RAnimated2.gif" />
     <Resource Include="Assets\rdo.jpg" />
     <Resource Include="Assets\RLogo.ico" />

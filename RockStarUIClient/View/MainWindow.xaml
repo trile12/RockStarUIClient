@@ -1,0 +1,58 @@
+﻿<Window x:Class="RockStarUIClient.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RockStarUIClient.View"
+        mc:Ignorable="d"
+        FontFamily="Arial"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" x:Name="home"
+        Background="#131518"
+        Title="Rockstar Game Launcher" Height="600" Width="1275"
+        MouseDown="home_MouseDown">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    FlowDirection="RightToLeft">
+            <Button Style="{StaticResource WindowButtonStyle}"
+                    Content="{StaticResource close_ico}"
+                    Click="Close_Click"/>
+            <Button Click="Restore_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WindowButtonStyle}">
+                        <Setter Property="Content" Value="{StaticResource maximize_ico}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=home,Path=WindowState}" Value="Maximized">
+                                <Setter Property="Content" Value="{StaticResource restore_ico}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+            </Button>
+            <Button Style="{StaticResource WindowButtonStyle}"
+                    Content="{StaticResource minimize_ico}"
+                    Click="Minimize_Click"/>
+        </StackPanel>
+        <MediaElement Grid.ColumnSpan="2"
+            Height="97"
+            Stretch="Uniform"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            Visibility="Visible" 
+            LoadedBehavior="Play"
+            UnloadedBehavior="Manual"
+            Source="../../Assets/RAnimated1.gif"
+            MediaEnded="MediaElement_Ended"
+            ScrubbingEnabled="True"/>
+        <Grid Background="Black">
+
+        </Grid>
+    </Grid>
+</Window>

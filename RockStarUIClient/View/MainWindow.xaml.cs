@@ -15,20 +15,23 @@ using System.Windows.Shapes;
 namespace RockStarUIClient.View
 {
     /// <summary>
-    /// Interaction logic for SplashScreen.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class SplashScreen : Window
+    public partial class MainWindow : Window
     {
-        public SplashScreen()
+        public MainWindow()
         {
             InitializeComponent();
         }
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void home_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                DragMove();
-            }
+
+        }
+
+        private void MediaElement_Ended(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -36,10 +39,17 @@ namespace RockStarUIClient.View
             Close();
         }
 
-        private void MediaElement_Ended(object sender, RoutedEventArgs e)
+        private void Restore_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
-            Hide();
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            else
+                WindowState = WindowState.Maximized;
+        }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
