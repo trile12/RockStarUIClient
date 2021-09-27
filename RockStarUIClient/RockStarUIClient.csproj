@@ -55,7 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="View\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Assets\icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,10 +66,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Themes\WindowButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -93,6 +100,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\gta4.png" />
+    <Resource Include="Assets\gta5.png" />
+    <Resource Include="Assets\gta5Name.png" />
+    <Resource Include="Assets\news1.jpg" />
+    <Resource Include="Assets\news2.jpg" />
+    <Resource Include="Assets\news3.jpg" />
+    <Resource Include="Assets\news4.jpg" />
+    <Resource Include="Assets\news5.jpg" />
+    <Resource Include="Assets\RAnimated1.gif" />
+    <Resource Include="Assets\RAnimated2.gif" />
+    <Resource Include="Assets\rdo.jpg" />
+    <Resource Include="Assets\RLogo.ico" />
+    <Resource Include="Assets\RLogo.png" />
+    <Resource Include="Assets\wallGta5.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
