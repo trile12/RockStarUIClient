@@ -51,8 +51,166 @@
             Source="../../Assets/RAnimated1.gif"
             MediaEnded="MediaElement_Ended"
             ScrubbingEnabled="True"/>
-        <Grid Background="Black">
+        <Grid Background="Black"
+              Width="275"
+              Name="MenuGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto  "/>
+            </Grid.RowDefinitions>
+            <Image HorizontalAlignment="Left"
+                   Height="39"
+                   Width="41"
+                   Margin="34,44,34,0"
+                   VerticalAlignment="Top"
+                   Source="/RockStarUIClient;component/Assets/RLogo.png"/>
+            <StackPanel Margin="0,32,0,0" Grid.Row="1">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type RadioButton}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="Gray"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Setter Property="FontSize" Value="11"/>
+                        <Setter Property="Margin" Value="0,20,0,0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type RadioButton}">
+                                    <Border Background="{TemplateBinding Background}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle Name="indicator"
+                                                       HorizontalAlignment="Left"
+                                                       Width="5"/>
+                                            <Image HorizontalAlignment="Left"
+                                                   Height="31"
+                                                   Margin="38,0,0,0"
+                                                   VerticalAlignment="Top"
+                                                   Width="31"
+                                                   Grid.Row="1"
+                                                   Source="{Binding Tag,RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}"/>
+                                            <TextBlock x:Name="gameName"
+                                                       HorizontalAlignment="Left"
+                                                       VerticalAlignment="Center"
+                                                       Margin="18,0,0,0"
+                                                       Grid.Column="1"
+                                                       Text="{TemplateBinding Content}"
+                                                       TextTrimming="WordEllipsis"
+                                                       Foreground="{TemplateBinding Foreground}"
+                                                       FontWeight="{TemplateBinding FontWeight}"
+                                                       FontSize="{TemplateBinding FontSize}"
+                                                       />
+                                        </Grid>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter TargetName="indicator"
+                                                    Property="Shape.Fill" Value="#fCAF17"/>
+                                            <Setter TargetName="gameName"
+                                                    Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard SpeedRatio="5">
+                                                        <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).Color"
+                                                                        From="Gray" To="White"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard SpeedRatio="5">
+                                                        <ColorAnimation Storyboard.TargetProperty="(RadioButton.Foreground).Color"
+                                                                        From="White" To="Gray"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="Now Available" Margin="39,18,0,0"/>
+                <RadioButton Content="Red Dead Online"
+                             Tag="/RockStarUIClient;component/Assets/rdo.jpg"/>
+                <RadioButton Content="Grand Theft Auto IV"
+                             Tag="/RockStarUIClient;component/Assets/gta4.png"/>
+                <TextBlock Text="Library" Margin="39,18,0,0"/>
+                <RadioButton Content="Grand Theft Auto V"
+                             Tag="/RockStarUIClient;component/Assets/gta5.png"
+                             IsChecked="True"/>
+            </StackPanel>
+            <ToggleButton Grid.Row="2"
+                          Background="Transparent"
+                          BorderBrush="Gray"
+                          BorderThickness="2"
+                          HorizontalAlignment="Left"
+                          Height="26"
+                          Width="30"
+                          Margin="39,0,0,39">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <StackPanel Name="container"
+                                        Orientation="Horizontal">
+                                <Path Name="iconPath"
+                                      Stretch="Uniform"
+                                      Fill="{TemplateBinding BorderBrush}"
+                                      Width="15"
+                                      Height="10"
+                                      Data="{StaticResource rightArrow}"/>
+                                <Rectangle Name="separator"
+                                           HorizontalAlignment="Left"
+                                           Width="2"
+                                           Fill="{TemplateBinding BorderBrush}"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="container"
+                                        Property="FlowDirection" Value="RightToLeft"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard SpeedRatio="5">
+                                            <ColorAnimation Storyboard.TargetProperty="(ToggleButton.BorderBrush).Color"
+                                                                        From="Gray" To="White"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard SpeedRatio="5">
+                                            <ColorAnimation Storyboard.TargetProperty="(ToggleButton.BorderBrush).Color"
+                                                                        From="White" To="Gray"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ToggleButton.Template>
 
+            </ToggleButton>
         </Grid>
     </Grid>
 </Window>

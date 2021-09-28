@@ -26,7 +26,10 @@ namespace RockStarUIClient.View
 
         private void home_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
 
         private void MediaElement_Ended(object sender, RoutedEventArgs e)
