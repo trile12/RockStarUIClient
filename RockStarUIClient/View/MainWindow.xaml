@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RockStarUIClient.View"
+        xmlns:local="clr-namespace:RockStarUIClient.View" xmlns:ccontrol="clr-namespace:RockStarUIClient.CControl"
         mc:Ignorable="d"
         FontFamily="Arial"
         WindowStyle="None"
@@ -13,6 +13,9 @@
         Title="Rockstar Game Launcher" Height="600" Width="1275"
         MouseDown="home_MouseDown">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/RockStarUIClient;component/Assets/wallGta5.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
@@ -41,16 +44,16 @@
                     Content="{StaticResource minimize_ico}"
                     Click="Minimize_Click"/>
         </StackPanel>
-        <MediaElement Grid.ColumnSpan="2"
+        <!--<MediaElement Grid.ColumnSpan="2"
             Height="97"
             Stretch="Uniform"
             HorizontalAlignment="Center" VerticalAlignment="Center"
             Visibility="Visible" 
             LoadedBehavior="Play"
             UnloadedBehavior="Manual"
-            Source="../../Assets/RAnimated1.gif"
+            Source="../../Assets/RAnimated2.gif"
             MediaEnded="MediaElement_Ended"
-            ScrubbingEnabled="True"/>
+            ScrubbingEnabled="True"/>-->
         <Grid Background="Black"
               Width="275"
               Name="MenuGrid">
@@ -212,5 +215,288 @@
 
             </ToggleButton>
         </Grid>
+        <Grid Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="135"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <UniformGrid Columns="4"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Center">
+                <UniformGrid.Resources>
+                    <DropShadowEffect x:Key="shadow"
+                                      ShadowDepth="0"
+                                      Direction="0"
+                                      Color="Gray"
+                                      Opacity="1"
+                                      BlurRadius="4"/>
+                    <Style TargetType="{x:Type RadioButton}">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="LightGray"/>
+                        <Setter Property="FontSize" Value="17"/>
+                        <Setter Property="Margin" Value="11,0"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Effect" Value="{StaticResource shadow}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type RadioButton}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <TextBlock Name="tab"
+                                                   Text="{TemplateBinding Content}"
+                                                   TextAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsChecked" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard SpeedRatio="3">
+                                                        <ColorAnimation Storyboard.TargetProperty="(ToggleButton.BorderBrush).Color"
+                                                                       To="White"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard SpeedRatio="3">
+                                                        <ColorAnimation Storyboard.TargetProperty="(ToggleButton.BorderBrush).Color"
+                                                                        To="LightGray"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </UniformGrid.Resources>
+                <RadioButton Content="GAMES"
+                             IsChecked="True"/>
+                <RadioButton Content="STORE"/>
+                <RadioButton Content="SETTINGS"/>
+                <Ellipse StrokeThickness="2"
+                         Stroke="White"
+                         Cursor="Hand"
+                         Height="40"
+                         Width="40"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Center"
+                         Margin="0,0,33,0">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="/RockStarUIClient;component/Assets/rdo.jpg"
+                                    Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </UniformGrid>
+            <Grid Grid.Row="1"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Button}" x:Key="NavButtonStyle">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid>
+                                        <Border Name="bd"
+                                                Background="#222222"
+                                                Opacity=".6"/>
+                                        <Path Name="icon"
+                                              Data="{StaticResource leftArrow}"
+                                              Stretch="Uniform"
+                                              Height="15"
+                                              Fill="White"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="bd"
+                                                    Property="Opacity"
+                                                    Value="1"/>
+                                        </Trigger>
+                                        <Trigger Property="HorizontalAlignment" Value="Right">
+                                            <Setter TargetName="icon"
+                                                    Property="Data"
+                                                    Value="{StaticResource rightArrow}"/>
+                                        </Trigger>
+
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
+                <StackPanel Margin="27">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Height" Value="66"/>
+                            <Setter Property="Width" Value="256"/>
+                            <Setter Property="Margin" Value="0,-27"/>
+                            <Setter Property="Effect" Value="{StaticResource dropShadow}"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border CornerRadius="6"
+                                                x:Name="bd">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                    <GradientStop x:Name="GradientStop1"
+                                                                  Color="#F6f6f6"
+                                                                  Offset="0"/>
+                                                    <GradientStop x:Name="GradientStop2"
+                                                                  Color="#E0E0E0"
+                                                                  Offset=".53"/>
+                                                    <GradientStop x:Name="GradientStop3"
+                                                                  Color="#C9C9C9"
+                                                                  Offset=".70 "/>
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                            <Border CornerRadius="6"
+                                                    BorderThickness="1"
+                                                    BorderBrush="Black"
+                                                    Margin="5">
+                                                <TextBlock Text="{TemplateBinding Content}"
+                                                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                           VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                                            </Border>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard SpeedRatio="5">
+                                                            <ColorAnimation Storyboard.TargetName="GradientStop1"
+                                                                Storyboard.TargetProperty="Color"
+                                                                       To="#fCAF17"/>
+                                                            <ColorAnimation Storyboard.TargetName="GradientStop2"
+                                                                Storyboard.TargetProperty="Color"
+                                                                       To="#fCAF17"/>
+                                                            <ColorAnimation Storyboard.TargetName="GradientStop3"
+                                                                Storyboard.TargetProperty="Color"
+                                                                       To="#fCAF17"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard SpeedRatio="5">
+                                                            <ColorAnimation Storyboard.TargetName="GradientStop1"
+                                                                Storyboard.TargetProperty="Color"
+                                                                       To="#F6F6F6"/>
+                                                            <ColorAnimation Storyboard.TargetName="GradientStop2"
+                                                                Storyboard.TargetProperty="Color"
+                                                                       To="#E0E0E0"/>
+                                                            <ColorAnimation Storyboard.TargetName="GradientStop3"
+                                                                Storyboard.TargetProperty="Color"
+                                                                       To="#C9C9C9"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.ExitActions>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Image Width="248"
+                           IsHitTestVisible="False"
+                           Source="/RockStarUIClient;component/Assets/gta5name.png"
+                           Stretch="Uniform"  
+                           HorizontalAlignment="Center"
+                           Panel.ZIndex="1"/>
+                    <Button Content="PLAY ON STEAM"
+                            FontSize="20"
+                            FontWeight="ExtraBold"/>
+                </StackPanel>
+                <ccontrol:CustomScrollViewer Grid.Column="1"
+                              x:Name="scrollViewer"
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Disabled">
+                    <StackPanel Orientation="Horizontal"
+                                Background="Transparent"
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                ScrollViewer.CanContentScroll="True">
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news1.jpg"
+                                            Margin="20,0,0,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news2.jpg"
+                                            Margin="20,0,0,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news3.jpg"
+                                            Margin="20,0,18,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news4.jpg"
+                                            Margin="20,0,18,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news5.jpg"
+                                            Margin="20,0,18,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news1.jpg"
+                                            Margin="20,0,0,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news2.jpg"
+                                            Margin="20,0,0,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news3.jpg"
+                                            Margin="20,0,18,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news4.jpg"
+                                            Margin="20,0,18,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news5.jpg"
+                                            Margin="20,0,18,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news1.jpg"
+                                            Margin="20,0,0,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news2.jpg"
+                                            Margin="20,0,0,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news3.jpg"
+                                            Margin="20,0,18,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news4.jpg"
+                                            Margin="20,0,18,0"/>
+                        <local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"
+                                            Source="/RockStarUIClient;component/Assets/news5.jpg"
+                                            Margin="20,0,18,0"/>
+                        <!--<local:GameCardView Caption="Get a 50%  Bonus Payout on The Cayo Perico Heist Finale"/>-->
+                    </StackPanel>
+                </ccontrol:CustomScrollViewer>
+                <Button Name="navLeftBtn"
+                        Grid.Column="1"
+                        Click="navLeftBtn_Click"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Height="38" Width="38"
+                        Style="{StaticResource NavButtonStyle}"/>
+                <Button Name="navRightBtn"
+                        Grid.Column="1"
+                        Click="navRightBtn_Click"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Height="38" Width="38"
+                        Style="{StaticResource NavButtonStyle}"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
+    
